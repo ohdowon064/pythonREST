@@ -10,11 +10,11 @@ class GameSerializer(serializers.Serializer):
 
     # create와 update는 상속한 클래스의 함수를 오버라이딩한 함수이다.
     # 구현하지않으면 부모클래스에서 NotImplementedError 예외를 발생시킨다.
-    def create(self, validated_data):
+    def create(self, validated_data): # POST(생성) 시 작동
         return Game.objects.create(**validated_data)
     
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.nname)
+    def update(self, instance, validated_data): # PUT(업데이트)시 작동
+        instance.name = validated_data.get('name', instance.name)
         instance.release_date = validated_data.get('release_date', instance.release_date)
         instance.game_category = validated_data.get('game_category', instance.game_category)
         instance.played = validated_data.get('played', instance.played)

@@ -17,7 +17,7 @@ class JSONResponse(HttpResponse):
 def game_list(request):
     if request.method == 'GET':
         games = Game.objects.all()
-        games_serializer = GameSerializer(games, many=True)
+        games_serializer = GameSerializer(games, many=True) # many=True 옵션은 여러 인스턴스를 직렬화
         return JSONResponse(games_serializer.data)
 
     elif request.method == 'POST':
@@ -39,3 +39,19 @@ def game_detail(request, pk):
         game = Game.objects.get(pk=pk)
     except Game.DoesNotExist:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        games_serializer = GameSerializer(game)
+        return JSONResponse(games_serializer.data)
+    
+    elif request.method == 'PUT':
+        game_data = JSONParser().parse(request)
+        game_serializer = GameSerializer(game, data=game_data)
+        if game_serializer.is_valid():
+            game_serializer.save()
+            return JSONResponse(game_serializer.data)
+        return JSONResponse(game_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        game.delete()
+        return HttpResponse(status=status.HTTP_204_NO_CONTENT)

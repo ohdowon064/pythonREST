@@ -1,2 +1,3 @@
 rest-venv
 .vscode
+gamesapi/gamesapi/secret_key.py

@@ -1,3 +1,4 @@
 rest-venv
 .vscode
 gamesapi/gamesapi/secret_key.py
+gamesapi/gamesapi/__pycache__/secret_key.cpython-38.pyc

@@ -13,7 +13,7 @@ from rest_framework.reverse import reverse
 class GameCategoryList(generics.ListCreateAPIView):
     queryset = GameCategory.objects.all()
     serializer_class = GameCategorySerializer
-    name = 'gamecategory-list'
+    name = 'gamecategory-list' # 단지 API 이름
 
 class GameCategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = GameCategory.objects.all()

@@ -5,7 +5,7 @@ from games.models import Player
 from games.models import PlayerScore
 
 class GameCategorySerializer(serializers.HyperlinkedModelSerializer):
-    games = serializers.HyperLinkedRelatedField(
+    games = serializers.HyperlinkedRelatedField(
         many=True,
         read_only=True,
         view_name='game-detail'
@@ -21,7 +21,7 @@ class GameCategorySerializer(serializers.HyperlinkedModelSerializer):
         )
 
 class GameSerializer(serializers.HyperlinkedModelSerializer):
-    game_category = serializers.SlugRelatedField(queryset=GameCategory.objects.all(), slug_filed='name')
+    game_category = serializers.SlugRelatedField(queryset=GameCategory.objects.all(), slug_field='name')
 
     class Meta:
         model = Game
@@ -42,7 +42,7 @@ class ScoreSerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'pk',
             'score',
-            'socre_date',
+            'score_date',
             'game'
         )
 
